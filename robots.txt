@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /login
+Disallow: /dashboard
+Disallow: /stats/*
+Allow: /
+
+Sitemap: https://seokali.com/sitemap.xml
