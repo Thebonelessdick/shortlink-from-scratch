@@ -1,0 +1,800 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-image: url('/static/images/cityscape.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff; /* Ubah warna teks utama menjadi putih */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Overlay untuk background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay hitam semi-transparan */
+    z-index: -1; /* Pastikan overlay berada di belakang konten */
+}
+
+
+
+/* Header */
+header {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeIn 1s ease-in-out; /* Animasi fade-in untuk header */
+}
+
+header .logo {
+    animation: slideInFromLeft 0.8s ease-in-out; /* Logo meluncur dari kiri */
+    padding: 5px; /* Tambahkan padding untuk memberi ruang di sekitar logo */
+}
+
+header .logo img {
+    height: 80px; /* Tingkatkan tinggi logo */
+    width: auto; /* Biarkan lebar menyesuaikan proporsi */
+}
+
+header nav {
+    animation: slideInFromTop 0.8s ease-in-out 0.2s; /* Navigasi meluncur dari atas dengan delay */
+}
+
+/* Sisanya tetap sama */
+
+header nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+header nav a:hover {
+    color: #0057FF;
+}
+
+header nav a.button-clicked {
+    animation: pulse 0.5s ease-in-out; /* Efek pulse saat link navigasi diklik */
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9); /* Background putih semi-transparan */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 1000px;
+    width: 100%;
+    color: #333; /* Warna teks tetap gelap di dalam container */
+    animation: slideInFromTop 1s ease-in-out 0.4s; /* Konten utama meluncur dari atas */
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #0057FF;
+    margin-bottom: 10px;
+    animation: fadeIn 1s ease-in-out 0.6s; /* Judul fade-in dengan delay */
+}
+
+p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-in-out 0.7s; /* Paragraf fade-in dengan delay */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: fadeIn 1s ease-in-out 0.8s; /* Form fade-in dengan delay */
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 15px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #0057FF;
+}
+
+button {
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    background: #0057FF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    animation: scaleUp 0.8s ease-in-out 0.9s; /* Tombol scale-up saat dimuat */
+}
+
+button:hover {
+    background: #003BBF;
+}
+
+button.button-clicked {
+    animation: pulse 0.5s ease-in-out; /* Efek pulse saat tombol diklik */
+}
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    animation: fadeIn 1s ease-in-out 1s; /* Hasil fade-in dengan delay */
+}
+
+.result p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.result a {
+    color: #0057FF;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.result a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: #ff3333;
+    font-size: 16px;
+    margin-top: 10px;
+    animation: fadeIn 1s ease-in-out 1s; /* Pesan error fade-in */
+}
+
+/* Dashboard Table */
+.url-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 1s ease-in-out 0.4s; /* Tabel fade-in */
+}
+
+.url-table th,
+.url-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+}
+
+.url-table th {
+    background: #0057FF;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.url-table td {
+    color: #333; /* Warna teks tetap gelap di dalam tabel */
+}
+
+.url-table tr:hover {
+    background: #f8f9fa;
+}
+
+/* Hanya link di kolom Short URL yang akan berwarna biru */
+.url-table td:nth-child(1) a {
+    color: #0057FF;
+    text-decoration: none;
+}
+
+.url-table td:nth-child(1) a:hover {
+    text-decoration: underline;
+}
+
+/* Kolom Lebar */
+.url-table th:nth-child(1),
+.url-table td:nth-child(1) {
+    width: 30%; /* Short URL */
+}
+
+.url-table th:nth-child(2),
+.url-table td:nth-child(2) {
+    width: 40%; /* Original URL */
+}
+
+.url-table th:nth-child(3),
+.url-table td:nth-child(3) {
+    width: 15%; /* Clicks */
+}
+
+.url-table th:nth-child(4),
+.url-table td:nth-child(4) {
+    width: 15%; /* Actions */
+}
+
+.action-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 5px;
+    transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.action-btn.button-clicked {
+    animation: pulse 0.5s ease-in-out; /* Efek pulse saat tombol diklik */
+}
+
+.edit-btn {
+    background: #28a745;
+    color: #fff !important; /* Pastikan teks putih dengan spesifisitas tinggi */
+}
+
+.edit-btn:hover {
+    background: #218838;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: #fff !important; /* Pastikan teks putih dengan spesifisitas tinggi */
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+.copy-btn {
+    background: #007bff; /* Warna biru untuk tombol Copy */
+    color: #fff !important; /* Pastikan teks putih */
+}
+
+.copy-btn:hover {
+    background: #0056b3; /* Warna biru lebih gelap saat hover */
+}
+
+/* Pagination */
+.pagination {
+    animation: fadeIn 1s ease-in-out 0.5s; /* Pagination fade-in */
+}
+
+/* Back Link */
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #0057FF;
+    text-decoration: none;
+    font-weight: 500;
+    animation: fadeIn 1s ease-in-out 1s; /* Back link fade-in */
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background: #fff;
+    padding: 20px 50px;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: auto; /* Pastikan footer berada di bawah */
+    animation: fadeIn 1s ease-in-out 1s; /* Footer fade-in dengan delay */
+}
+
+footer p {
+    font-size: 14px;
+    color: #ddd; /* Warna abu-abu terang untuk teks copyright */
+    margin-bottom: 10px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-links a {
+    font-size: 14px;
+    color: #0057FF;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #003BBF;
+    text-decoration: underline;
+}
+
+/* Modal */
+.modal {
+    display: none; /* Sembunyikan modal secara default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay semi-transparan */
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+    background: #fff;
+    margin: 15% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: #333;
+    animation: slideInFromTop 0.3s ease-in-out;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #0057FF;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content .error {
+    margin-top: 10px;
+    animation: none; /* Nonaktifkan animasi untuk error di modal */
+}
+
+/* Layout dua kolom untuk halaman Home */
+.home-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; /* Jarak antar kolom */
+    justify-content: space-between;
+    max-width: 1200px;
+    padding: 40px 20px; /* Tambahkan padding untuk spasi yang lebih baik */
+    align-items: flex-start; /* Pastikan elemen sejajar di atas */
+}
+
+/* Bagian Shorten Your URLs (Kiri) */
+.shorten-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px; /* Batasi lebar maksimum untuk keseimbangan */
+}
+
+.shorten-section h1 {
+    font-size: 32px; /* Sedikit lebih kecil untuk keseimbangan */
+    font-weight: 600;
+    color: #0057FF;
+    margin-bottom: 10px;
+    animation: fadeIn 1s ease-in-out 0.6s;
+}
+
+.shorten-section p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out 0.7s;
+}
+
+.shorten-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.shorten-section input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+.shorten-section input:focus {
+    border-color: #0057FF;
+    outline: none;
+}
+
+.shorten-section button {
+    padding: 12px;
+    font-size: 16px;
+    background: #0057FF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.shorten-section button:hover {
+    background: #003BBF;
+}
+
+.shorten-section .result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.shorten-section .result p {
+    margin: 0 0 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.shorten-section .result a {
+    color: #0057FF;
+    text-decoration: none;
+}
+
+.shorten-section .result a:hover {
+    text-decoration: underline;
+}
+
+.shorten-section .error {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Bagian Tabel Shortlinks (Kanan) */
+.shortlinks-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px; /* Batasi lebar maksimum untuk keseimbangan */
+}
+
+.shortlinks-section h1 {
+    font-size: 32px; /* Sesuaikan ukuran dengan sisi kiri */
+    font-weight: 600;
+    color: #0057FF;
+    margin-bottom: 10px;
+    animation: fadeIn 1s ease-in-out 0.6s;
+}
+
+.shortlinks-section p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out 0.7s;
+}
+
+/* Wrapper untuk tabel */
+.table-wrapper {
+    overflow-x: auto; /* Tambahkan scroll horizontal jika tabel terlalu lebar */
+}
+
+/* Tabel */
+.url-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out 0.8s;
+}
+
+.url-table th,
+.url-table td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+.url-table th {
+    background: #0057FF;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.url-table td {
+    color: #333;
+}
+
+.url-table td a {
+    color: #0057FF;
+    text-decoration: none;
+}
+
+.url-table td a:hover {
+    text-decoration: underline;
+}
+
+/* Kolom Original URL */
+.url-table .original-url {
+    max-width: 200px; /* Batasi lebar kolom */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Tambahkan ellipsis (...) jika teks terlalu panjang */
+}
+
+/* Tombol Go to Dashboard */
+.dashboard-btn {
+    background: #0057FF;
+    color: #fff !important;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    text-align: center;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.dashboard-btn:hover {
+    background: #003BBF;
+}
+
+/* Responsivitas untuk layar kecil */
+@media (max-width: 768px) {
+    .home-container {
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .shorten-section,
+    .shortlinks-section {
+        max-width: 100%;
+    }
+
+    .shorten-section h1,
+    .shortlinks-section h1 {
+        font-size: 28px;
+    }
+
+    .shorten-section p,
+    .shortlinks-section p {
+        font-size: 14px;
+    }
+
+    .url-table th,
+    .url-table td {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .url-table .original-url {
+        max-width: 150px;
+    }
+
+    .dashboard-btn {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .shorten-section h1,
+    .shortlinks-section h1 {
+        font-size: 24px;
+    }
+
+    .shorten-section p,
+    .shortlinks-section p {
+        font-size: 12px;
+    }
+
+    .shorten-section input,
+    .shorten-section button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .url-table th,
+    .url-table td {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    .url-table .original-url {
+        max-width: 100px;
+    }
+}
+
+/* Responsivitas untuk layar kecil */
+@media (max-width: 768px) {
+    .home-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .shorten-section,
+    .shortlinks-section {
+        width: 100%;
+    }
+}
+
+/* Responsivitas */
+@media (max-width: 768px) {
+    .url-table th,
+    .url-table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .action-btn {
+        padding: 8px 15px;
+        font-size: 12px;
+        margin: 0 3px;
+    }
+
+    footer {
+        padding: 15px 30px;
+    }
+
+    footer p,
+    .footer-links a {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .url-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .url-table th,
+    .url-table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .action-btn {
+        padding: 6px 10px;
+        font-size: 10px;
+        margin: 0 2px;
+    }
+
+    footer {
+        padding: 10px 20px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Styling untuk Privacy Policy, Terms of Service, dan Contact Us */
+.container ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.container li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #0057FF;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+    0% { transform: translateY(-50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+    0% { transform: translateX(-50px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Nonaktifkan animasi untuk pengguna yang memilih reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    header,
+    header .logo,
+    header nav,
+    .container,
+    h1,
+    p,
+    form,
+    button,
+    .result,
+    .error,
+    .url-table,
+    .pagination,
+    .back-link,
+    footer,
+    .button-clicked {
+        animation: none !important;
+    }
+}

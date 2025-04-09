@@ -1,0 +1,29 @@
+<svg width="300" height="120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Latar belakang gradien untuk logo -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E6F0FA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D1E3F9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0057FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#003BBF;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Latar belakang logo -->
+  <rect x="0" y="0" width="300" height="120" fill="url(#bgGrad)" rx="15" ry="15" />
+
+  <!-- Ikon rantai (mewakili shortlink) -->
+  <g transform="translate(15, 37.5)">
+    <path d="M15 15 H45 V45 H15 Z M30 0 V60 M0 30 H60" stroke="#003BBF" stroke-width="4.5" fill="none" />
+  </g>
+
+  <!-- Teks "SEOXXX Shortlink" -->
+  <text x="75" y="60" font-family="'Poppins', sans-serif" font-size="30" font-weight="600" fill="url(#textGrad)">
+    SEOXXX
+  </text>
+  <text x="75" y="90" font-family="'Poppins', sans-serif" font-size="18" fill="#003BBF">
+    Shortlink
+  </text>
+</svg>
