@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SEOXXX Shortlink - Create Short, Powerful Links</title>
+        <!-- Meta Tags untuk SEO -->
+        <meta name="description" content="SEOXXX Shortlink: Create short, powerful links in seconds. Track clicks, manage your URLs, and share easily with our free URL shortening service.">
+        <meta name="keywords" content="URL shortener, short links, link management, track clicks, SEOXXX Shortlink, free URL shortening">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="SEOXXX Shortlink">
+        <meta name="language" content="en">
+    
+        <!-- Open Graph Tags untuk Media Sosial -->
+        <meta property="og:title" content="SEOXXX Shortlink - Create Short, Powerful Links">
+        <meta property="og:description" content="Create short, powerful links in seconds with SEOXXX Shortlink. Track clicks, manage your URLs, and share easily.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://seokali.com/">
+        <meta property="og:image" content="{{ url_for('static', filename='logo.svg') }}">
+        <meta property="og:site_name" content="SEOXXX Shortlink">
+    
+        <!-- Twitter Card Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="SEOXXX Shortlink - Create Short, Powerful Links">
+        <meta name="twitter:description" content="Create short, powerful links in seconds with SEOXXX Shortlink. Track clicks, manage your URLs, and share easily.">
+        <meta name="twitter:image" content="{{ url_for('static', filename='logo.svg') }}">
+        
+    
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://seokali.com/">
+    
+        <!-- Favicon -->
+        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%230057FF'/%3E%3Ctext x='50%25' y='50%25' font-family='Poppins, sans-serif' font-size='20' font-weight='600' fill='%23FFFFFF' text-anchor='middle' dominant-baseline='middle'%3ES%3C/text%3E%3C/svg%3E">
+    
+        <!-- Structured Data (JSON-LD) -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "SEOXXX Shortlink",
+            "url": "https://seokali.com/",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://seokali.com/?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+        </script>
+    
+        <!-- CSS dan Font -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "SEOXXX Shortlink",
+                "url": "https://nameless-crag-74874.herokuapp.com/",
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://nameless-crag-74874.herokuapp.com/?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            }
+            </script>
+    </head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.svg') }}" alt="SEOXXX Shortlink Logo">
+        </div>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/stats/example">Stats</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container home-container">
+            <!-- Bagian Shorten Your URLs (Kiri) -->
+            <div class="shorten-section">
+                <h1>Shorten Your URLs</h1>
+                <p>Create short, powerful links in seconds!</p>
+                
+                <form method="POST" action="/">
+                    <input type="text" name="url" placeholder="Enter your long URL here" required>
+                    <input type="text" name="custom_code" placeholder="Custom short code (optional)">
+                    <button type="submit" id="shorten-button">Shorten</button>
+                </form>
+
+                {% if short_url %}
+                    <div class="result">
+                        <p>Your shortened URL:</p>
+                        <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+                        <p>Track clicks at: <a href="/stats/{{ short_url.split('/')[-1] }}">Stats</a></p>
+                    </div>
+                {% endif %}
+
+                {% if error %}
+                    <p class="error">{{ error }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Bagian Tabel Shortlinks (Kanan) -->
+            <div class="shortlinks-section">
+                <h1>Your Recent Shortlinks</h1>
+                <p>View your latest shortlinks below.</p>
+
+                {% if urls %}
+                    <div class="table-wrapper">
+                        <table class="url-table">
+                            <thead>
+                                <tr>
+                                    <th>SHORT URL</th>
+                                    <th>ORIGINAL URL</th>
+                                    <th>CLICKS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for url in urls %}
+                                    <tr>
+                                        <td><a href="{{ base_url }}{{ url[0] }}" target="_blank">{{ base_url }}{{ url[0] }}</a></td>
+                                        <td class="original-url">{{ url[1] }}</td>
+                                        <td>{{ url[2] }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="/dashboard" class="action-btn dashboard-btn">Go to Dashboard</a>
+                {% else %}
+                    <p>You haven't created any shortlinks yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 SEOXXX Shortlink. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript untuk animasi klik -->
+    <script>
+        // Animasi untuk tombol Shorten
+        document.getElementById('shorten-button').addEventListener('click', function() {
+            this.classList.add('button-clicked');
+        });
+
+        // Animasi untuk link navigasi
+        document.querySelectorAll('header nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                this.classList.add('button-clicked');
+            });
+        });
+
+        // Animasi untuk tombol Go to Dashboard
+        document.querySelectorAll('.dashboard-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.add('button-clicked');
+            });
+        });
+    </script>
+</body>
+</html>

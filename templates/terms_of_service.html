@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Terms of Service - SEOXXX Shortlink</title>
+        <!-- Meta Tags untuk SEO -->
+        <meta name="description" content="Read the Terms of Service for SEOXXX Shortlink. Understand the rules and guidelines for using our URL shortening service.">
+        <meta name="keywords" content="SEOXXX Shortlink terms of service, URL shortener terms">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="SEOXXX Shortlink">
+        <meta name="language" content="en">
+    
+        <!-- Open Graph Tags untuk Media Sosial -->
+        <meta property="og:title" content="Terms of Service - SEOXXX Shortlink">
+        <meta property="og:description" content="Read the Terms of Service for SEOXXX Shortlink. Understand the rules and guidelines for using our service.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://seokali.com/terms_of_service">
+        <meta property="og:image" content="{{ url_for('static', filename='logo.svg') }}">
+        <meta property="og:site_name" content="SEOXXX Shortlink">
+    
+        <!-- Twitter Card Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Terms of Service - SEOXXX Shortlink">
+        <meta name="twitter:description" content="Read the Terms of Service for SEOXXX Shortlink. Understand the rules and guidelines for using our service.">
+        <meta name="twitter:image" content="{{ url_for('static', filename='logo.svg') }}">
+    
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://seokali.com/terms_of_service">
+    
+        <!-- Favicon -->
+        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%230057FF'/%3E%3Ctext x='50%25' y='50%25' font-family='Poppins, sans-serif' font-size='20' font-weight='600' fill='%23FFFFFF' text-anchor='middle' dominant-baseline='middle'%3ES%3C/text%3E%3C/svg%3E">
+    
+        <!-- CSS dan Font -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.svg') }}" alt="SEOXXX Shortlink Logo">
+        </div>
+        <nav>
+            <a href="/Home">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/stats/example">Stats</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Terms of Service</h1>
+            <p>Last Updated: April 07, 2025</p>
+
+            <p>Welcome to SEOXXX Shortlink. These Terms of Service ("Terms") govern your use of our website and services. By accessing or using our services, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use our services.</p>
+
+            <h2>1. Use of Our Services</h2>
+            <p>You agree to use our services only for lawful purposes and in accordance with these Terms. You are responsible for all activities conducted under your account. You may not:</p>
+            <ul>
+                <li>Use our services to create shortlinks for illegal, harmful, or fraudulent purposes.</li>
+                <li>Attempt to gain unauthorized access to our systems or interfere with the proper functioning of our services.</li>
+                <li>Use our services in a way that violates any applicable laws or regulations.</li>
+            </ul>
+
+            <h2>2. Account Responsibilities</h2>
+            <p>You are responsible for maintaining the confidentiality of your account credentials (username and password). You agree to notify us immediately of any unauthorized use of your account.</p>
+
+            <h2>3. Intellectual Property</h2>
+            <p>All content on our website, including text, graphics, logos, and software, is the property of SEOXXX Shortlink or its licensors and is protected by copyright and other intellectual property laws. You may not reproduce, distribute, or create derivative works from our content without our express written permission.</p>
+
+            <h2>4. Termination</h2>
+            <p>We reserve the right to suspend or terminate your account at our discretion, with or without notice, if we believe you have violated these Terms. Upon termination, your right to use our services will immediately cease.</p>
+
+            <h2>5. Limitation of Liability</h2>
+            <p>SEOXXX Shortlink is not liable for any indirect, incidental, special, or consequential damages arising out of or in connection with your use of our services. Our total liability to you for any claim arising from these Terms or your use of our services will not exceed $100.</p>
+
+            <h2>6. Changes to These Terms</h2>
+            <p>We may update these Terms from time to time. We will notify you of any changes by posting the new Terms on this page and updating the "Last Updated" date. You are advised to review these Terms periodically for any changes.</p>
+
+            <h2>7. Contact Us</h2>
+            <p>If you have any questions about these Terms, please contact us at:</p>
+            <p>Email: alexanderwu05@gmail.com</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 SEOXXX Shortlink. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript untuk animasi klik -->
+    <script>
+        // Animasi untuk link navigasi
+        document.querySelectorAll('header nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                this.classList.add('button-clicked');
+            });
+        });
+    </script>
+</body>
+</html>

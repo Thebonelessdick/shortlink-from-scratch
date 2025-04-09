@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect - SEOXXX Shortlink</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.svg') }}" alt="SEOXXX Shortlink Logo">
+        </div>
+        <nav>
+            <a href="/Home">Home</a>
+            <a href="/stats/example">Stats</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Redirect Error</h1>
+            <p class="error">{{ error }}</p>
+            <a href="/" class="back-link">Back to Home</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 SEOXXX Shortlink. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript untuk animasi klik -->
+    <script>
+        // Animasi untuk link navigasi
+        document.querySelectorAll('header nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                this.classList.add('button-clicked');
+            });
+        });
+
+        // Animasi untuk link Back to Home
+        document.querySelector('.back-link').addEventListener('click', function() {
+            this.classList.add('button-clicked');
+        });
+    </script>
+</body>
+</html>

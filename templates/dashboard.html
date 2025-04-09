@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard - SEOXXX Shortlink</title>
+        <!-- Meta Tags untuk SEO -->
+        <meta name="description" content="Manage your shortlinks with SEOXXX Shortlink Dashboard. Edit, delete, and track clicks on your shortened URLs easily.">
+        <meta name="keywords" content="URL shortener dashboard, manage shortlinks, track clicks, SEOXXX Shortlink">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="SEOXXX Shortlink">
+        <meta name="language" content="en">
+    
+        <!-- Open Graph Tags untuk Media Sosial -->
+        <meta property="og:title" content="Dashboard - SEOXXX Shortlink">
+        <meta property="og:description" content="Manage your shortlinks with SEOXXX Shortlink Dashboard. Edit, delete, and track clicks on your shortened URLs.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://seokali.com/dashboard">
+        <meta property="og:image" content="{{ url_for('static', filename='logo.svg') }}">
+        <meta property="og:site_name" content="SEOXXX Shortlink">
+    
+        <!-- Twitter Card Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Dashboard - SEOXXX Shortlink">
+        <meta name="twitter:description" content="Manage your shortlinks with SEOXXX Shortlink Dashboard. Edit, delete, and track clicks on your shortened URLs.">
+        <meta name="twitter:image" content="{{ url_for('static', filename='logo.svg') }}">
+    
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://seokali.com/dashboard">
+    
+        <!-- Favicon -->
+        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%230057FF'/%3E%3Ctext x='50%25' y='50%25' font-family='Poppins, sans-serif' font-size='20' font-weight='600' fill='%23FFFFFF' text-anchor='middle' dominant-baseline='middle'%3ES%3C/text%3E%3C/svg%3E">
+    
+        <!-- CSS dan Font -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.svg') }}" alt="SEOXXX Shortlink Logo">
+        </div>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/stats/example">Stats</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Your Shortlinks</h1>
+            <p>Manage your shortlinks below.</p>
+
+            {% if urls %}
+                <table class="url-table">
+                    <thead>
+                        <tr>
+                            <th>SHORT URL</th>
+                            <th>ORIGINAL URL</th>
+                            <th>CLICKS</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for url in urls %}
+                            <tr>
+                                <td><a href="{{ base_url }}{{ url[0] }}" target="_blank">{{ base_url }}{{ url[0] }}</a></td>
+                                <td>{{ url[1] }}</td>
+                                <td>{{ url[2] }}</td>
+                                <td>
+                                    <!-- Tombol Copy -->
+                                    <button class="action-btn copy-btn" data-url="{{ base_url }}{{ url[0] }}">Copy</button>
+                                    <!-- Tombol Edit (memicu modal) -->
+                                    <button class="action-btn edit-btn" data-short-code="{{ url[0] }}" data-original-url="{{ url[1] }}">Edit</button>
+                                    <a href="{{ url_for('delete_url_route', short_code=url[0]) }}" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this shortlink?')">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div class="pagination" style="margin-top: 20px; text-align: center;">
+                    {% if page > 1 %}
+                        <a href="{{ url_for('dashboard', page=page-1) }}" class="action-btn" style="background: #0057FF; color: #fff;">Previous</a>
+                    {% endif %}
+                    <span style="margin: 0 10px;">Page {{ page }} of {{ total_pages }}</span>
+                    {% if page < total_pages %}
+                        <a href="{{ url_for('dashboard', page=page+1) }}" class="action-btn" style="background: #0057FF; color: #fff;">Next</a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p>You haven't created any shortlinks yet.</p>
+            {% endif %}
+        </div>
+
+        <!-- Modal untuk Edit Shortlink -->
+        <div class="modal" id="editModal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Edit Shortlink</h2>
+                <p>Update your shortlink details below.</p>
+                <form id="editForm">
+                    <input type="text" id="original_url" name="original_url" placeholder="Enter the original URL" required>
+                    <input type="text" id="short_code" name="short_code" placeholder="Short code" required>
+                    <button type="submit" id="save-button">Save Changes</button>
+                </form>
+                <p class="error" id="modalError" style="display: none;"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 SEOXXX Shortlink. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript untuk animasi klik, fungsi copy, dan modal -->
+    <script>
+        // Animasi untuk link navigasi
+        document.querySelectorAll('header nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                this.classList.add('button-clicked');
+            });
+        });
+
+        // Animasi untuk tombol Delete
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.add('button-clicked');
+            });
+        });
+
+        // Animasi untuk tombol Previous dan Next
+        document.querySelectorAll('.pagination a').forEach(link => {
+            link.addEventListener('click', function() {
+                this.classList.add('button-clicked');
+            });
+        });
+
+        // Fungsi untuk tombol Copy
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
+                navigator.clipboard.writeText(url).then(() => {
+                    this.textContent = 'Copied!';
+                    setTimeout(() => {
+                        this.textContent = 'Copy';
+                    }, 2000);
+                    this.classList.add('button-clicked');
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                    this.textContent = 'Error';
+                    setTimeout(() => {
+                        this.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+        });
+
+        // Logika untuk Modal Edit
+        const modal = document.getElementById('editModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const editForm = document.getElementById('editForm');
+        const modalError = document.getElementById('modalError');
+        let currentShortCode = '';
+
+        // Buka modal saat tombol Edit diklik
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                currentShortCode = this.getAttribute('data-short-code');
+                const originalUrl = this.getAttribute('data-original-url');
+                
+                // Isi form dengan data saat ini
+                document.getElementById('original_url').value = originalUrl;
+                document.getElementById('short_code').value = currentShortCode;
+                
+                // Reset error message
+                modalError.style.display = 'none';
+                modalError.textContent = '';
+                
+                // Tampilkan modal
+                modal.style.display = 'block';
+                this.classList.add('button-clicked');
+            });
+        });
+
+        // Tutup modal saat tombol close diklik
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Tutup modal saat pengguna mengklik di luar modal
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Kirim data edit menggunakan AJAX
+        editForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const newOriginalUrl = document.getElementById('original_url').value;
+            const newShortCode = document.getElementById('short_code').value;
+
+            fetch(`/edit/${currentShortCode}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'original_url': newOriginalUrl,
+                    'short_code': newShortCode
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Jika berhasil, tutup modal dan refresh halaman
+                    modal.style.display = 'none';
+                    location.reload();
+                } else {
+                    // Jika gagal, tampilkan pesan error
+                    modalError.style.display = 'block';
+                    modalError.textContent = data.error || 'An error occurred';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                modalError.style.display = 'block';
+                modalError.textContent = 'An error occurred';
+            });
+        });
+
+        // Animasi untuk tombol Save Changes
+        document.getElementById('save-button').addEventListener('click', function() {
+            this.classList.add('button-clicked');
+        });
+    </script>
+</body>
+</html>
